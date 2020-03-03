@@ -1,0 +1,60 @@
+<div class="category-container">
+  <div class="page-heading">
+    <span class="header-text"></span>
+  </div>
+
+  <div class="content-wrapper">
+    <div class="row">
+      <div class="col">
+        <div class="input-form">
+          <form [formGroup]="doctorCategoryInputForm">
+            <div class=" form-group row">
+              <div class="col-sm-3 col-form-label"></div>
+              <div class="col-sm-3">
+                <mat-form-field class="full-width">
+                  <input type="text" matInput placeholder="Enter Category Name" formControlName="categoryName" />
+                </mat-form-field>
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <div class="col-sm-3"></div>
+              <div class="col-sm-9 action-button">
+                <button mat-raised-button type="submit" [disabled]="!doctorCategoryInputForm.valid"
+                  class="btn button button-save" (click)="saveCategory()">
+                  Add Category
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row table-wrapper">
+    <table mat-table [dataSource]="specialities">
+      <!-- Name Column -->
+      <ng-container matColumnDef="category">
+        <th mat-header-cell *matHeaderCellDef>category</th>
+        <td mat-cell *matCellDef="let category">{{ category.name }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef>Actions</th>
+        <td mat-cell *matCellDef="let element">
+          <button type="button" class="btn button button-cancel" (click)="deleteCategory(element)">
+            Delete
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+  </div>
+  <div class="action-buttons">
+    <button type="button" mat-raised-button class="btn button button-cancel" (click)="closeClicked()">
+      Back
+    </button>
+  </div>
+</div>

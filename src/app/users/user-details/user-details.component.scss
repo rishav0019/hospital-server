@@ -1,0 +1,90 @@
+@import "../../../assets/styles/common";
+
+
+.doc-details-container {
+  margin-top: 10px;
+  overflow: auto;
+  height: calc(100vh - 0px);
+  padding: 0px 0vw 0vw 2vw;
+
+  .custom-btn {
+    margin-top: 9px;
+
+    .mat-button-wrapper {
+      color: $base-color;
+      text-transform: capitalize;
+      font-size: 1em;
+    }
+
+  }
+
+  .docom-btn {
+    color: $base-color;
+    text-transform: capitalize;
+    font-size: 1em;
+  }
+
+  .delete-btn {
+    color: $negative-color;
+  }
+
+  .doc-overview {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+  }
+
+
+}
+
+.bold-text {
+  font-size: 1.1em;
+  font-weight: 500;
+}
+
+
+
+.card-layout {
+  line-height: 2.4em;
+  color: #616161;
+
+  span {
+    margin-left: 0.8vw;
+  }
+}
+
+.doc-details-card {
+  padding: 10px;
+}
+
+.doc-image {
+  .mat-icon {
+    font-size: 50px;
+  }
+
+}
+
+.location-logo {
+  .mat-icon {
+    margin-top: 0.8vw;
+  }
+}
+
+
+.search-input {
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+
+
+
+.add-details-text {
+  color: $base-color;
+}
+
+.add-details-text:hover {
+  cursor: pointer;
+}

@@ -1,0 +1,104 @@
+@import "../../../assets/styles/colors";
+
+.mat-expansion-panel-header {
+  height: 75px !important;
+
+  .title-container {
+    width: 100%;
+
+    .row {
+      margin-left: unset;
+    }
+
+    .title-amount {
+      font-size: medium;
+      color: #000;
+    }
+  }
+}
+
+.details-container {
+  padding: 2vw;
+
+  .other-details-container {
+    margin-top: 1vw;
+
+    .mega-amount {
+      font-size: x-large;
+      margin-top: 10px;
+      margin-bottom: 10px;
+    }
+
+    .label {
+      list-style: none;
+      text-align: left;
+      margin: 0;
+      padding: 0;
+
+
+      li {
+        line-height: 2em;
+        margin: 0;
+        padding: 0;
+      }
+
+    }
+  }
+
+}
+
+.title-time {
+  font-size: large;
+}
+
+.title-customer {
+  font-size: medium;
+}
+
+.red {
+  color: $negative-color;
+}
+
+
+.img__wrapper {
+  width: 500px;
+  height: 300px;
+  position: relative;
+  overflow: hidden;
+}
+
+
+
+table {
+  margin-top: 10px;
+  width: 100%;
+  background-color: #F5F5F5;
+
+}
+
+td.mat-cell {
+  border-bottom-style: none;
+}
+
+th.mat-header-cell {
+  border-bottom-style: none;
+}
+
+
+.return-container {
+  margin-top: 20px;
+  width: 100%;
+  font-weight: 500;
+
+  .return-label {
+    font-size: 1.4em;
+    font-weight: 600;
+    letter-spacing: 1px;
+  }
+
+
+  .sub-text {
+    font-weight: 400;
+    color: #616161;
+  }
+}

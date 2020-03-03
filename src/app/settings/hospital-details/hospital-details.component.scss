@@ -1,0 +1,12 @@
+@import "../../../assets/styles/common";
+
+.settings-container {
+  margin-left: 20px;
+  margin-top: 20px;
+
+  .group-label {
+    font-weight: $weight-bold;
+    font-size: 1.1em;
+    margin-left: 15px;
+  }
+}

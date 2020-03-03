@@ -1,0 +1,56 @@
+@import "../../../assets/styles/common";
+@import '../../../assets/styles/colors';
+
+.doctor-add-container {
+  padding: 10vh;
+}
+
+.custom-btn {
+  color: $base-color;
+}
+
+hr {
+  border: none;
+  height: 1px;
+  padding-bottom: 1px;
+
+  // color: #333;
+  /* old IE */
+  background-color: #2AB77E;
+  /* Modern Browsers */
+}
+
+mat-icon {
+  color: $negative-color;
+}
+
+.mat-dialog-content {
+  padding-left: 2vw;
+  padding-right: 2vw;
+  overflow-x: hidden;
+}
+
+
+.radio-group {
+  margin-top: 2.4vh;
+}
+
+.multiselect-dropdown .dropdown-btn {
+  display: inline-block;
+  border: 1px solid #adadad;
+  width: 100%;
+  padding: 6px 12px;
+  margin-bottom: 0;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.1;
+  text-align: left;
+  vertical-align: middle;
+  cursor: pointer;
+  background-image: none;
+  border-radius: 4px;
+}
+
+.time-slot {
+  font-size: 1.5rem;
+}

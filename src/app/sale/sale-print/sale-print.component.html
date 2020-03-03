@@ -1,0 +1,233 @@
+<!-- <app-titlebar [title]="'Invoice Print'"></app-titlebar> -->
+
+<div class="sale-print-container">
+
+  <div class="print-screen" #screen>
+    <div class="row">
+      <div class="col print-header" *ngIf="billing">
+        <h2>INVOICE #{{billing.invoice_no }}</h2>
+      </div>
+      <div class="col print-header" *ngIf="!billing">
+        <h2>INVOICE #</h2>
+      </div>
+    </div>
+    <div class="row bill-details">
+      <div class="col-lg-6">
+
+        <div class="row">
+          <div class="col-lg-3 label">
+            <span>Customer</span>
+          </div>
+          <div class="col-lg-9" *ngIf="billing">
+            <span>{{billing.customer_name}}</span>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-3">
+            <span>Address</span>
+          </div>
+          <div class="col-lg-9" *ngIf="billing">
+            <span>{{billing.customer_address}}</span>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-3">
+            <span>Phone</span>
+          </div>
+          <div class="col-lg-9" *ngIf="billing">
+            <span>{{billing.customer_mobile}}</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-3">
+            <span>Doctor</span>
+          </div>
+          <div class="col-lg-9" *ngIf="billing">
+            <span>{{billing.doctor_name}}</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-3">
+            <span>Date</span>
+          </div>
+          <div class="col-lg-9" *ngIf="billing">
+            <span>{{billing.billing_date |  date:'MMM dd,yy hh:mm a'}}</span>
+          </div>
+        </div>
+
+
+
+
+      </div>
+      <div class="col-lg-6 shop-details" *ngIf="!hospital">
+        <mat-spinner [diameter]="35"></mat-spinner>
+      </div>
+
+      <div class="col-lg-6 shop-details" *ngIf="hospital ">
+        <div class="row">
+          <div class="col">
+            <span>{{hospital.hospitalName}}</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <span>{{hospital.address}}</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <span>{{hospital.city}}</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <span>{{hospital.phoneNumber}}</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <!-- <span>{{branch.gstin}}</span> -->
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <!-- <span>{{pharmachist.email}}</span> -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col table-container" *ngIf="dataLength==0">
+        <mat-spinner [diameter]="50"></mat-spinner>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col table-container" *ngIf="dataLength>0">
+
+        <table mat-table [dataSource]="dataSource">
+          <ng-container matColumnDef="product_name">
+            <th mat-header-cell *matHeaderCellDef>Product</th>
+            <td mat-cell *matCellDef="let row"> {{row.product_name}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="selling_rate">
+            <th mat-header-cell *matHeaderCellDef>Price</th>
+            <td mat-cell *matCellDef="let row"> {{row.selling_rate | currency:'INR'}} </td>
+          </ng-container>
+
+
+          <ng-container matColumnDef="qty">
+            <th mat-header-cell *matHeaderCellDef>Quantity</th>
+            <td mat-cell *matCellDef="let row"> {{row.qty}} </td>
+          </ng-container>
+
+
+          <ng-container matColumnDef="total_amount">
+            <th mat-header-cell *matHeaderCellDef>Total</th>
+            <td mat-cell *matCellDef="let row"> {{row.selling_rate * row.qty | currency:'INR'}} </td>
+          </ng-container>
+
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+          </tr>
+
+
+        </table>
+
+
+      </div>
+    </div>
+    <div class="row after-products">
+      <div class="col-lg-8">
+        <div class="row">
+          <div class="col note">
+            <span>NOTE:</span><br>
+            <span>All credit payments have to be settled within 10 days of the invoice date.</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-4 amount-details" *ngIf="!billing">
+        <mat-spinner [diameter]="35"></mat-spinner>
+      </div>
+      <div class="col-lg-4 amount-details" *ngIf="billing">
+
+        <div class="row">
+          <div class="col">
+            <span>SubTotal</span>
+          </div>
+          <div class="col amount">
+            <span>{{billing.totalAmount | currency:'INR'}}</span>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col">
+            <span>CGST</span>
+          </div>
+          <div class="col amount">
+            <span>{{billing.taxAmount/2 | currency:'INR'}}</span>
+          </div>
+        </div>
+
+
+        <div class="row">
+          <div class="col">
+            <span>SGST</span>
+          </div>
+          <div class="col amount">
+            <span>{{billing.taxAmount/2 | currency:'INR'}}</span>
+          </div>
+        </div>
+
+
+        <div class="row">
+          <div class="col">
+            <span>DISCOUNT</span>
+          </div>
+          <div class="col amount">
+            <span>-{{billing.discountAmount | currency:'INR'}}</span>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col">
+            <span>GRAND TOTAL</span>
+          </div>
+          <div class="col amount">
+            <span>{{billing.netAmount | currency:'INR'}}</span>
+          </div>
+        </div>
+
+
+
+
+
+      </div>
+    </div>
+
+    <div class="row action-buttons" data-html2canvas-ignore="true">
+      <div class="col">
+        <button (click)="goBack()" class="custom-btn" mat-raised-button color="primary">Back</button>
+
+
+        <button (click)="printInvoice()" class="custom-btn" mat-raised-button color="primary">
+          <span *ngIf="!isPrinting">Print</span>
+          <mat-spinner *ngIf="isPrinting" [diameter]="35"></mat-spinner>
+        </button>
+
+
+      </div>
+    </div>
+
+
+  </div>
+
+
+
+</div>

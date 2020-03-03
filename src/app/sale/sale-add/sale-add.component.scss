@@ -1,0 +1,156 @@
+@import "../../../assets/styles/common";
+
+.sale-add-container {
+  height: calc(100vh - 64px);
+  //background-color: $primary-background;
+  color: $primary-text;
+  padding-left: 2px;
+  padding-right: 0vw;
+  padding-top: 0px;
+  overflow-y: scroll;
+  margin-top: 30px;
+  padding-bottom: 30px;
+
+  .table-container {
+    margin-left: unset;
+    margin-right: unset;
+
+    .table-wrapper {
+      margin-top: 2vw;
+      width: 100%;
+      overflow-x: auto;
+
+      table {
+        table-layout: unset;
+      }
+
+      tr th:first-child {
+        width: 15vw;
+      }
+
+      tr th:last-child {
+        width: 4vw;
+      }
+
+      tr th:nth-child(4) {
+        width: 8vw;
+      }
+
+      td button.mat-icon-button {
+        width: 30px;
+      }
+
+      th.mat-header-cell {
+        padding: 15px;
+      }
+
+      td {
+        padding-left: 12px;
+      }
+    }
+  }
+
+  .product-input {
+    margin-bottom: 1vw;
+  }
+
+  .amount-details {
+    padding-left: 1.5vw;
+    padding-right: 1.5vw;
+    line-height: 2.8em;
+
+    .table-label {
+      text-align: left;
+    }
+
+    .table-data {
+      text-align: right;
+      font-weight: bold;
+    }
+  }
+
+  #totalAmount {
+    font-size: 1.2em;
+    color: $positive-color;
+  }
+
+  #sale-add-btn {
+    font-size: 1.2em;
+    padding-top: 0.5vw;
+    padding-bottom: 0.5vw;
+  }
+
+  mat-radio-button {
+    // margin-left: 10px;
+  }
+
+  mat-checkbox {
+    // margin-left: 3.1vw;
+  }
+
+  #prod-batch-select {
+    //width: 8vw;
+    //max-width: 8vw;
+    width: 100%;
+  }
+
+  #discount-select {
+    width: 100px;
+  }
+
+  #discount-type-select {
+    margin-left: 2vw;
+    width: 100%;
+    max-width: 15vw;
+  }
+}
+
+// .custom-btn {
+//   margin-top: 2vw;
+// }
+
+
+.mat-table {
+  background-color: rgba(0, 0, 0, 0);
+}
+
+
+.custom-btn ::ng-deep .mat-progress-spinner circle,
+.mat-spinner circle {
+  stroke: white !important;
+}
+
+.comp-purchase {
+  margin-top: 8px;
+}
+
+.add-button {
+  margin-top: 9px;
+}
+
+.medicine-container {
+  padding: 10px 0vh;
+
+  .medicine-wrapper {
+    width: 100%;
+
+    //overflow-x: auto;
+    .row {
+      margin-top: 12px;
+
+      .content {
+        width: 100%;
+      }
+
+      .content:last-child {
+        padding: 1px;
+      }
+
+      .lower-content {
+        color: gray;
+      }
+    }
+
+  }
+
+}

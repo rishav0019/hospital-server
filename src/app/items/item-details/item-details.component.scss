@@ -1,0 +1,92 @@
+@import "../../../assets/styles/common";
+
+.product-opening-add-container {
+  margin-top: 10px;
+  height: calc(100vh - 0px);
+  padding: 0px 0vw 0vw 1vw;
+  overflow-y: scroll;
+
+  .stock-open-container {
+    width: 100%;
+    max-width: 90vw;
+    padding: 1vw;
+    background-color: #ffffff;
+    text-align: center;
+    border-radius: 0px;
+  }
+  .products-container {
+    margin-top: 20px;
+    .mat-form-field {
+      width: 100%;
+      .search-field {
+        width: 100%;
+      }
+    }
+    .addnew-btn {
+      margin-top: 9px;
+    }
+
+    .table-container {
+      position: relative;
+      height: 100%;
+      overflow: auto;
+      .mat-table {
+        table-layout: unset;
+        th {
+          padding: 7px 13px;
+        }
+      }
+    }
+  }
+}
+
+.toolbar-container {
+  display: flex;
+
+  .main-toolbar {
+    background-color: white;
+
+    #titlebar_header_text {
+      margin-left: 2vw;
+    }
+
+    .button-titlebar {
+      padding: 10px;
+      border: none;
+      background: none;
+
+      mat-icon {
+        color: $base-color;
+      }
+    }
+
+    .right-aligned {
+      margin-left: auto;
+      order: 2;
+    }
+  }
+}
+
+.loading-custom-btn {
+  width: 6.4vw;
+  height: 2.2vw;
+  padding-top: 0.5vw;
+  padding-bottom: 0.5vw;
+
+  .mat-spinner {
+    margin-left: 1.2vw;
+  }
+}
+
+.mat-slide-toggle {
+  margin-top: 1vw;
+}
+
+.custom-btn ::ng-deep .mat-progress-spinner circle,
+.mat-spinner circle {
+  stroke: white !important;
+}
+
+#saveProductBtn {
+  margin-top: 0.6vw;
+}

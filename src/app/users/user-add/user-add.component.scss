@@ -1,0 +1,23 @@
+@import "../../../assets/styles/common";
+@import '../../../assets/styles/colors';
+
+.custom-btn {
+  color: $base-color;
+}
+
+.subtitle {
+  font-size: 1em;
+  color: $primary-text;
+  margin-bottom: 2vh;
+}
+
+.mat-dialog-content {
+  padding-left: 2vw;
+  padding-right: 2vw;
+  overflow-x: hidden;
+}
+
+
+.radio-group {
+  margin-top: 2.4vh;
+}

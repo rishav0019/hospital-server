@@ -1,0 +1,19 @@
+@import "../assets/styles/_colors.scss";
+@import "../assets/styles/_fonts.scss";
+
+mat-sidenav-container {
+  height: 100vh;
+  font-family: $font-normal;
+
+  mat-toolbar {
+    margin: 0px;
+  }
+
+  mat-sidenav {
+    width: 15%;
+    font-size: 1em;
+    font-weight: $weight-normal;
+    background-color: $background-color-dark-light;
+    color: $text-color-light;
+  }
+}

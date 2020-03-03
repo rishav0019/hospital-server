@@ -1,0 +1,92 @@
+<div class="doc-details-container">
+
+
+
+  <div class="row">
+    <div class="col-sm-5">
+      <mat-form-field class="search-input">
+        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search Doctors">
+        <mat-hint align="start">Search by Name,Email or Mobile no. </mat-hint>
+        <mat-icon matSuffix>search</mat-icon>
+      </mat-form-field>
+    </div>
+
+    <div class="col-sm-2">
+      <button type="submit" (click)="openDoctorAddDialog(null)" class="custom-btn" mat-raised-button color="primary">
+        New Doctor
+      </button>
+    </div>
+  </div>
+
+
+  <div class="row">
+
+    <div class="col">
+      <ul class="card-list">
+
+
+        <li *ngFor="let dummy of ' '.repeat(2).split(''), let x = index">
+
+          <mat-card class="details-card" *ngIf="isLoading">
+            <div class="wrapper">
+              <div class="profilePic animate"></div>
+              <div class="comment br animate w80"></div>
+              <div class="comment br animate"></div>
+            </div>
+          </mat-card>
+
+        </li>
+
+
+
+
+        <li *ngFor="let doctor of filteredDoctors">
+          <mat-card *ngIf="!isLoading" class="details-card">
+            <mat-card-header>
+
+              <div mat-card-avatar class="img-avatar">{{doctor.name.charAt(0).toUpperCase()}}</div>
+
+              <mat-card-title class="truncate-180px">{{doctor.name}}</mat-card-title>
+
+              <button mat-icon-button color="primary" aria-label="edit">
+                <div (click)="editDoc(doctor.id)">
+                  <mat-icon>edit</mat-icon>
+                </div>
+
+              </button>
+              <mat-card-subtitle class="truncate-180px">
+                <span *ngIf="doctor.email"> {{doctor.email}}</span>
+                <span (click)="editDoc(doctor.id)" class="add-details-text" *ngIf="!doctor.email">Add Email</span>
+              </mat-card-subtitle>
+            </mat-card-header>
+
+            <mat-card-content>
+              <ul class="details-list">
+                <li class="details-list-item" *ngIf="doctor.gender">
+                  {{doctor.gender}}
+                </li>
+                <li class="details-list-item" (click)="editDoc(doctor.id)" *ngIf="!doctor.gender"
+                  class="add-details-text">
+                  Add Gender
+                </li>
+                <li class="details-list-item">
+                  {{doctor.mobileNumber}}
+                </li>
+                <li class="details-list-item">
+                  <span
+                    *ngIf="doctor.address && doctor.state">{{doctor.address}},{{doctor.city}},{{doctor.state}}</span>
+
+                  <span (click)="editDoc(doctor.id)" class="add-details-text"
+                    *ngIf="!doctor.address || !doctor.state">Add address</span>
+
+                </li>
+              </ul>
+            </mat-card-content>
+          </mat-card>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+
+</div>

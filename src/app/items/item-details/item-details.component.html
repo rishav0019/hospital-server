@@ -1,0 +1,226 @@
+<div class="product-opening-add-container">
+  <div class="stock-open-container  mat-elevation-z1">
+    <form [formGroup]="openingStockForm">
+      <div class="row">
+        <div class="col-lg-3">
+          <mat-form-field class="full-width">
+            <input type="text" placeholder="Product" matInput formControlName="name" />
+          </mat-form-field>
+        </div>
+
+        <div class="col-lg-2">
+          <mat-form-field class="full-width">
+            <input type="text" matInput placeholder="Batch No." formControlName="batchNo" />
+            <!-- <mat-error *ngIf="openingStockForm.get('batchNo').errors?.required">
+              Batch is required
+            </mat-error> -->
+          </mat-form-field>
+        </div>
+
+        <div class="col-lg-2">
+          <mat-form-field class="full-width">
+            <input matInput [matDatepicker]="picker" placeholder="Expiry" formControlName="expiryDate" />
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker startView="multi-year" (yearSelected)="chosenYearHandler($event)"
+              (monthSelected)="chosenMonthHandler($event, picker)">
+            </mat-datepicker>
+          </mat-form-field>
+        </div>
+
+        <div class="col-lg-2">
+          <mat-form-field class="full-width">
+            <input type="number" matInput placeholder="Buying Price/unit" formControlName="purchaseRate" />
+          </mat-form-field>
+        </div>
+
+        <div class="col-lg-2">
+          <mat-form-field class="full-width">
+            <input type="number" matInput placeholder="MRP/unit" formControlName="MRP" />
+          </mat-form-field>
+        </div>
+        <div class="col-lg-1">
+          <mat-form-field class="full-width">
+            <input type="number" matInput placeholder="Discount%" formControlName="discount" />
+          </mat-form-field>
+        </div>
+        <div class="col-lg-2">
+          <mat-form-field class="full-width">
+            <input type="number" matInput placeholder="Sales Price/unit" formControlName="sellingRate" />
+          </mat-form-field>
+        </div>
+
+        <div class="col-lg-1">
+          <mat-form-field class="full-width">
+            <input type="number" matInput placeholder="GST %" formControlName="GST" appDiscount />
+          </mat-form-field>
+        </div>
+
+        <!-- <div class="col-lg-2">
+          <mat-form-field class="full-width">
+            <input
+              type="number"
+              matInput
+              placeholder="Quantity in units"
+              formControlName="stock"
+              appQuantity
+            />
+
+          </mat-form-field>
+        </div> -->
+
+        <div class="col-lg-2">
+          <mat-form-field class="full-width">
+            <input type="number" matInput placeholder="Min. Stock Level" formControlName="minStock" appQuantity />
+          </mat-form-field>
+        </div>
+        <div class="col col-lg-1">
+          <mat-form-field class="full-width">
+            <input type="text" matInput placeholder="Box No." formControlName="boxNo" />
+          </mat-form-field>
+        </div>
+
+        <div class="col col-lg-1">
+          <mat-form-field class="full-width">
+            <input type="text" matInput placeholder="Rack No." formControlName="rackNo" />
+          </mat-form-field>
+        </div>
+
+        <div class="col col-lg-1">
+          <mat-slide-toggle formControlName="isDrug">Drug</mat-slide-toggle>
+        </div>
+
+        <div class="col col-lg-1">
+          <button type="submit" (click)="saveProduct()" class="custom-btn" mat-raised-button matTooltip="Save Product"
+            color="primary" id="saveProductBtn">
+            <span *ngIf="!isProductSaving">Save Product</span>
+            <mat-spinner *ngIf="isProductSaving" [diameter]="30"></mat-spinner>
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="products-container">
+    <div class="row">
+      <div class="col-12 col-sm-8 col-lg-5">
+        <mat-form-field>
+          <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search by Product name or Code"
+            class="search-field" />
+          <mat-icon matSuffix>search</mat-icon>
+        </mat-form-field>
+      </div>
+      <!-- <div class="col-12 col-sm-4 col-lg-4">
+        <button type="submit" (click)="openMasterProductDialog(null)" class="custom-btn addnew-btn" mat-raised-button
+          color="primary">
+          Add New Product
+        </button>
+      </div> -->
+    </div>
+    <div class="table-container" *ngIf="isTableLoading">
+      <mat-spinner [diameter]="40"></mat-spinner>
+    </div>
+
+    <div class="table-container" *ngIf="!isTableLoading && dataLength > 0">
+      <table mat-table [dataSource]="dataSource">
+        <ng-container matColumnDef="product_name">
+          <th mat-header-cell *matHeaderCellDef>Product</th>
+          <td mat-cell *matCellDef="let row">{{ row.name }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="expiry_date">
+          <th mat-header-cell *matHeaderCellDef>Expiry</th>
+          <td mat-cell *matCellDef="let row">
+            <span *ngIf="!row.expiry_date">-</span>
+            <span *ngIf="row.expiry_date">{{
+              row.expiry_date.toDate() | date: "MMM,y"
+            }}</span>
+          </td>
+        </ng-container>
+
+        <!-- <ng-container matColumnDef="stock">
+          <th mat-header-cell *matHeaderCellDef>Quantity in Units</th>
+          <td mat-cell *matCellDef="let row">
+            <span *ngIf="!row.stock">-</span>
+            <span *ngIf="row.stock">{{ row.stock }}</span>
+          </td>
+        </ng-container> -->
+
+        <ng-container matColumnDef="gst">
+          <th mat-header-cell *matHeaderCellDef>GST%</th>
+          <td mat-cell *matCellDef="let row">
+            <span *ngIf="row.gst">{{ row.gst }}%</span>
+            <span *ngIf="!row.gst">-</span>
+          </td>
+        </ng-container>
+        <!--
+        <ng-container matColumnDef="CGST">
+          <th mat-header-cell *matHeaderCellDef>CGST%</th>
+          <td mat-cell *matCellDef="let row" [matTooltip]="row.CGST"> {{row.CGST}}% </td>
+        </ng-container>
+
+        <ng-container matColumnDef="IGST">
+          <th mat-header-cell *matHeaderCellDef>IGST%</th>
+          <td mat-cell *matCellDef="let row" [matTooltip]="row.IGST"> {{row.IGST}}% </td>
+        </ng-container> -->
+
+        <ng-container matColumnDef="purchase_rate">
+          <th mat-header-cell *matHeaderCellDef>Buying Price/unit</th>
+          <td mat-cell *matCellDef="let row">
+            <span *ngIf="!row.purchase_rate">-</span>
+            <span *ngIf="row.purchase_rate">{{ row.purchase_rate | currency: "INR" }}
+            </span>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="mrp">
+          <th mat-header-cell *matHeaderCellDef>MRP/unit</th>
+          <td mat-cell *matCellDef="let row">
+            <span *ngIf="!row.mrp">-</span>
+            <span *ngIf="row.mrp">{{ row.mrp | currency: "INR" }} </span>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="selling_rate">
+          <th mat-header-cell *matHeaderCellDef>Sales Price /unit</th>
+          <td mat-cell *matCellDef="let row">
+            <span *ngIf="!row.selling_rate">-</span>
+            <span *ngIf="row.selling_rate">{{ row.selling_rate | currency: "INR" }}
+            </span>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="boxNo">
+          <th mat-header-cell *matHeaderCellDef>Box No</th>
+          <td mat-cell *matCellDef="let row">
+            <span *ngIf="!row.boxNo">-</span>
+            <span *ngIf="row.boxNo">{{ row.boxNo }} </span>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="rackNo">
+          <th mat-header-cell *matHeaderCellDef>Rack No</th>
+          <td mat-cell *matCellDef="let row">
+            <span *ngIf="!row.rackNo">-</span>
+            <span *ngIf="row.rackNo">{{ row.rackNo }} </span>
+          </td>
+        </ng-container>
+
+        <!-- Action Column -->
+        <ng-container matColumnDef="action">
+          <th mat-header-cell *matHeaderCellDef></th>
+          <td mat-cell *matCellDef="let row">
+            <button mat-icon-button matTooltip="Edit Row">
+              <mat-icon (click)="editProduct(row)">edit</mat-icon>
+            </button>
+            <button mat-icon-button matTooltip="Delete Row">
+              <mat-icon (click)="deleteProduct(row)">delete</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      </table>
+    </div>
+    <mat-paginator [pageSizeOptions]="[10, 5, 20]" showFirstLastButtons></mat-paginator>
+  </div>
+</div>

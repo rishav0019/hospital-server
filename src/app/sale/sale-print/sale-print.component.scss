@@ -1,0 +1,58 @@
+@import "../../../assets/styles/common";
+
+.sale-print-container {
+
+  padding-bottom: 6vh;
+  height: 100%;
+  overflow: auto;
+  margin-top: 10vh;
+
+
+  .print-screen {
+
+    width: 70vw;
+    padding-left: 4vw;
+    padding-right: 4vw;
+    margin: 0 auto;
+
+
+    .print-header {
+      text-align: center;
+      border-bottom: 1px solid black;
+      border-top: 1px solid black;
+    }
+
+    .after-products {
+      padding-top: 2vw;
+    }
+
+    .shop-details {
+      text-align: right;
+    }
+
+    span {
+      font-size: 1.2em;
+    }
+
+    .amount-details {
+      text-align: right;
+      line-height: 2.2em;
+      font-weight: 600;
+    }
+  }
+
+  .action-buttons {
+    text-align: center;
+    padding-top: 4vw;
+    margin-bottom: 4vw;
+
+    button {
+      margin-left: 1vw;
+    }
+  }
+}
+
+.custom-btn ::ng-deep .mat-progress-spinner circle,
+.mat-spinner circle {
+  stroke: white !important;
+}

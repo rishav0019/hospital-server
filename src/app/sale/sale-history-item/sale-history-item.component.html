@@ -1,0 +1,167 @@
+<mat-accordion>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <div class="row title-container">
+          <div class="col-12 col-md-8">
+            <div class="row title-time">
+              {{ item.billing_date | date:'MMMM dd, yyyy hh:mm a' }}
+            </div>
+            <div class="row title-customer">
+              {{ (item.customer_name)? item.customer_name : 'Unknown Customer'}}
+            </div>
+          </div>
+          <div class="col-12 col-md-4">
+            <div class="row title-amount">
+              {{ item.netAmount | currency: 'INR' }}
+            </div>
+          </div>
+        </div>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <div class="row details-container">
+      <div class="col-12 col-md-8">
+        <div class="row title-time">
+          {{ item.billing_date | date:'MM dd,yyyy hh:mm a' }}
+        </div>
+        <div class="row title-customer">
+          {{ (item.customer_name)? item.customer_name : 'Unknown Customer'}}
+        </div>
+        <div class="other-details-container">
+
+          <div class="row justify-content-start">
+            <div class="col-3">
+              <ul class="label">
+                <li><span>Subtotal</span></li>
+                <li><span>CGST</span></li>
+                <li><span>SGST</span></li>
+                <li><span>Discount</span></li>
+                <li class="mega-amount"><span>Total</span></li>
+                <br>
+                <li><span>Doctor</span></li>
+                <li><span>Invoice #</span></li>
+              </ul>
+            </div>
+            <div class="col-4">
+              <ul class="label">
+                <li><span> {{ item.totalAmount | currency: 'INR' }} </span></li>
+                <li><span> {{ item.taxAmount/2 | currency: 'INR' }} </span></li>
+                <li><span> {{ item.taxAmount/2 | currency: 'INR' }} </span></li>
+                <li><span> {{ item.discountAmount | currency: 'INR' }} </span></li>
+                <li class="mega-amount"><span> {{ item.netAmount | currency: 'INR' }} </span></li>
+                <br>
+                <li><span> {{ (item.doctor_name)? item.doctor_name : 'Unknown Doctor'}}</span></li>
+                <!-- <li><span> {{ item.invoice_id }} </span></li> -->
+              </ul>
+            </div>
+          </div>
+
+
+
+        </div>
+
+      </div>
+      <div class="col-12 col-md-4">
+        <div class="row">
+          <a target="_blank" class="custom-btn" (click)="showInvoice()" mat-button color="primary">
+            <mat-icon aria-hidden="false" aria-label="Example home icon">remove_red_eye</mat-icon>
+            View Details
+          </a>
+
+        </div>
+        <div class="row">
+          <!-- <a target="_blank" class="custom-btn" [routerLink]="['/printSale',item.billing_id]" mat-button
+            color="primary"> -->
+          <a target="_blank" class="custom-btn" [routerLink]="['/printSale']" mat-button color="primary">
+            <mat-icon aria-hidden="false" aria-label="Example home icon">print</mat-icon> Print Details
+          </a>
+        </div>
+        <div class="row">
+          <!-- <a (click)="openSaleReturnDialog()" class="custom-btn red" mat-button> -->
+          <a class="custom-btn red" mat-button>
+            <mat-icon aria-hidden="false" aria-label="Example home icon">assignment_return</mat-icon> Returns
+          </a>
+        </div>
+      </div>
+
+
+      <div class="row return-container">
+        <div class="col">
+          <div class="row">
+            <div class="col">
+              <span class="return-label">Returns against this bill</span>
+            </div>
+
+          </div>
+          <div class="row">
+            <div class="col">
+              <!-- <table *ngIf="!isLoading" mat-table [dataSource]="returnsDataSource"> -->
+              <table mat-table [dataSource]="returnsDataSource">
+                <!-- Checkbox Column -->
+                <ng-container matColumnDef="select">
+                  <th mat-header-cell *matHeaderCellDef>
+
+                  </th>
+                  <td mat-cell *matCellDef="let row">
+                  </td>
+                </ng-container>
+
+                <!-- Name Column -->
+                <ng-container matColumnDef="name">
+                  <th mat-header-cell *matHeaderCellDef> Name </th>
+                  <td mat-cell *matCellDef="let element">
+                    <span> {{element.product_name}}</span><br>
+                    <span class="sub-text">Return Qty: {{element.noOfReturns}}</span>
+                  </td>
+
+
+                </ng-container>
+
+                <!-- Weight Column -->
+                <ng-container matColumnDef="batch">
+                  <th mat-header-cell *matHeaderCellDef>Batch </th>
+                  <td mat-cell *matCellDef="let element">
+                    <span>Batch: {{element.batch_no}} </span><br>
+                    <span class="sub-text">Expiry: {{element.expiryDate}}</span>
+                  </td>
+
+
+                </ng-container>
+
+                <ng-container matColumnDef="total">
+                  <th mat-header-cell *matHeaderCellDef> Total </th>
+                  <td mat-cell *matCellDef="let element">
+
+                    <span>{{(element.selling_rate * element.qty)-element.discount | currency:"INR"}} </span><br>
+                    <span class="sub-text">GST {{element.gst}} %</span>
+                  </td>
+
+                </ng-container>
+
+                <!-- Symbol Column -->
+                <ng-container matColumnDef="returnDate">
+                  <th mat-header-cell *matHeaderCellDef>Date returned
+                  </th>
+                  <td mat-cell *matCellDef="let element">
+                    <span> Date returned</span><br>
+                    <span class="sub-text">{{element.return_date | date:'MMMM dd,yyyy hh:mm a'}}</span>
+                  </td>
+                </ng-container>
+
+
+
+
+                <!-- <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr> -->
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+                </tr>
+              </table>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </mat-expansion-panel>
+</mat-accordion>
+<br>

@@ -1,0 +1,91 @@
+@import "../../../assets/styles/common";
+
+.appointment-details-container {
+  width: 100%;
+  overflow-x: hidden;
+  height: 100%;
+  margin-bottom: 10vh;
+  padding: 15px 0 25px 0;
+}
+
+
+
+table {
+  width: 100%;
+  margin: 0 auto;
+}
+
+tr.detail-row {
+  height: 0;
+}
+
+// tr.element-row:not(.example-expanded-row):hover {
+//   background: $background-color-dark-light;
+//   color: $text-color-light;
+// }
+
+tr.element-row:active {
+  background: #efefef;
+}
+
+td.mat-cell {
+  border-bottom-style: none;
+}
+
+th.mat-header-cell {
+  border-bottom-style: none;
+}
+
+
+.element-row td {
+  border-bottom-width: 0;
+
+}
+
+th {
+  font-weight: bold;
+  font-size: 1.1em
+}
+
+.expand-element-detail {
+  overflow: hidden;
+  display: flex;
+}
+
+
+
+
+
+
+.element-description-attribution {
+  padding: 16px;
+  margin: 10px;
+  font-weight: bold;
+  font-size: 15px;
+  padding: 10px;
+}
+
+.list {
+  list-style: none;
+}
+
+.appointment-list {
+  padding: 10px;
+  list-style: none;
+}
+
+.status-select {
+
+  margin-top: -25px;
+}
+
+
+
+.make-red {
+  background-color: #ef9a9a;
+}
+
+.date-input {
+  margin-top: 5px;
+  padding-right: 10px;
+}

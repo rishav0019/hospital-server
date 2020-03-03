@@ -1,0 +1,18 @@
+@import "../../../assets/styles/common";
+
+.settings-container {
+
+  padding-left: 100px;
+  padding-top: 70px;
+  height: 100%;
+
+  button {
+    width: 10vw;
+    //  height: 3vw;
+  }
+
+  .settings-btn {
+    margin: 10px;
+    padding: 10px;
+  }
+}

@@ -1,0 +1,85 @@
+<div class="doc-details-container">
+
+
+
+  <div class="row">
+    <div class="col-sm-5">
+      <mat-form-field class="search-input">
+        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search User">
+        <mat-hint align="start">Search by Name,Email or Mobile no. </mat-hint>
+        <mat-icon matSuffix>search</mat-icon>
+      </mat-form-field>
+    </div>
+
+  </div>
+
+
+  <div class="row">
+
+    <div class="col">
+      <ul class="card-list">
+
+
+        <li *ngFor="let dummy of ' '.repeat(2).split(''), let x = index">
+
+          <mat-card class="details-card" *ngIf="isLoading">
+            <div class="wrapper">
+              <div class="profilePic animate"></div>
+              <div class="comment br animate w80"></div>
+              <div class="comment br animate"></div>
+            </div>
+          </mat-card>
+
+        </li>
+
+
+
+
+        <li *ngFor="let user of filteredUsers">
+          <mat-card *ngIf="!isLoading" class="details-card">
+            <mat-card-header>
+
+              <div mat-card-avatar class="img-avatar">{{user.name.charAt(0).toUpperCase()}}</div>
+
+              <mat-card-title class="truncate-180px">{{user.name}}</mat-card-title>
+
+              <button mat-icon-button color="primary" aria-label="edit">
+                <div (click)="editDoc(user.id)">
+                  <mat-icon>edit</mat-icon>
+                </div>
+
+              </button>
+              <mat-card-subtitle class="truncate-180px">
+                <span *ngIf="user.email"> {{user.email}}</span>
+                <span (click)="editDoc(user.id)" class="add-details-text" *ngIf="!user.email">Add Email</span>
+              </mat-card-subtitle>
+            </mat-card-header>
+
+            <mat-card-content>
+              <ul class="details-list">
+                <li *ngIf="!user.gender" (click)="editDoc(user.id)" class="add-details-text">Gender</li>
+                <li *ngIf="user.gender" class="details-list-item">
+                  {{user.gender}}
+                </li>
+                <li *ngIf="!user.phoneNumber" (click)="editDoc(user.id)" class="add-details-text">Gender</li>
+                <li class="details-list-item" *ngIf="user.phoneNumber">
+
+                  {{user.phoneNumber}}
+                </li>
+                <li class="details-list-item">
+                  <span *ngIf="user.address ">{{user.address}},</span>
+
+                  <span (click)="editDoc(user.id)" class="add-details-text" *ngIf="!user.address ">Add
+                    address</span>
+
+                </li>
+              </ul>
+            </mat-card-content>
+          </mat-card>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+
+</div>

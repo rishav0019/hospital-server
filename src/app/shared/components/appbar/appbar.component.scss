@@ -1,0 +1,23 @@
+@import "../../../../assets/styles/common";
+@import "../../../../assets/styles/fonts.scss";
+@import "../../../../assets/styles/mixins.scss";
+
+.main-toolbar {
+  font-family: $font-normal;
+  color: $text-color-light;
+  background-color: $background-color-dark-light;
+
+  @include z-depth-2;
+
+  .title-text {
+    padding: 5px;
+    font-weight: $weight-bold;
+    text-align: center;
+    flex: 1 1 auto;
+  }
+
+  .toolbar-text {
+    padding: 5px;
+    font-weight: $weight-normal;
+  }
+}

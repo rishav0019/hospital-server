@@ -1,0 +1,110 @@
+<h2 mat-dialog-title>Add/Edit Patient</h2>
+
+<div mat-dialog-content>
+
+  <form [formGroup]="patientAddForm">
+
+    <div class="row">
+      <div class="col">
+        <mat-form-field class="full-width">
+          <input type="text" matInput placeholder="Patient Name" id="name" formControlName="name">
+
+        </mat-form-field>
+      </div>
+
+      <div class="col">
+        <mat-form-field class="full-width">
+          <input type="text" matInput placeholder="Mobile No." formControlName="mobileNumber" appMobileNumber>
+
+        </mat-form-field>
+      </div>
+    </div>
+
+
+
+
+    <div class="row">
+      <div class="col-sm-6">
+        <mat-form-field class="full-width">
+          <input type="text" matInput placeholder="Email" formControlName="email">
+        </mat-form-field>
+      </div>
+      <div class="col-sm-6 radio-group">
+        <mat-radio-group aria-label="Select an option" formControlName="gender">
+          <mat-radio-button value="MALE">Male</mat-radio-button>
+          <mat-radio-button value="FEMALE">Female</mat-radio-button>
+        </mat-radio-group>
+      </div>
+    </div>
+
+
+    <div class="row">
+      <div class="col-sm-6">
+        <mat-form-field class="full-width">
+          <input type="text" matInput placeholder="Address" formControlName="address">
+        </mat-form-field>
+      </div>
+      <div class="col">
+        <mat-form-field class="full-width">
+          <input type="text" matInput placeholder="Age" formControlName="age">
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="row">
+
+
+      <div class="col">
+
+
+        <mat-form-field class="full-width">
+          <input type="text" placeholder="State" matInput [matAutocomplete]="autoState" formControlName="state">
+
+          <mat-autocomplete autoActiveFirstOption #autoState="matAutocomplete">
+
+
+
+          </mat-autocomplete>
+        </mat-form-field>
+
+
+      </div>
+
+      <div class="col">
+
+
+        <mat-form-field class="full-width">
+          <input type="text" placeholder="City" matInput [matAutocomplete]="autoCity" formControlName="city">
+
+          <mat-autocomplete autoActiveFirstOption #autoCity="matAutocomplete">
+
+
+
+          </mat-autocomplete>
+        </mat-form-field>
+
+
+      </div>
+    </div>
+
+
+
+
+
+
+
+
+
+  </form>
+
+
+
+</div>
+<div mat-dialog-actions>
+  <button class="custom-btn" (click)="onNoClick()" mat-button color="primary">Cancel</button>
+  <button class="custom-btn" id="cust-add-btn" (click)="savePatient()" mat-button color="primary">
+    <span *ngIf="!isSaving && !patientId">Save</span>
+    <span *ngIf="!isSaving && patientId">Update</span>
+    <mat-spinner *ngIf="isSaving" [diameter]="30"></mat-spinner>
+  </button>
+</div>

@@ -1,0 +1,344 @@
+<div class="sale-add-container">
+  <div class="input-form">
+    <form [formGroup]="saleAddForm" autocomplete="off">
+      <div class="row">
+        <div class="col-12 col-lg-6">
+          <div class="card-layout mat-elevation-z1">
+
+            <div class="row">
+              <div class="col col-lg-4">
+                <mat-form-field class="full-width">
+                  <input type="tel" placeholder="Patient Mobile" matInput [matAutocomplete]="autoPatient"
+                    formControlName="custMobile" appMobileNumber>
+                  <mat-autocomplete autoActiveFirstOption #autoPatient="matAutocomplete">
+
+                    <mat-option *ngFor="let patient of
+                    filteredPatients | async" [value]="patient">
+                      {{patient.mobileNumber}}
+                    </mat-option>
+
+                  </mat-autocomplete>
+                </mat-form-field>
+              </div>
+              <div class="col col-lg-5">
+                <mat-form-field class="full-width">
+                  <input type="text" matInput placeholder="Patient name" formControlName="custName"
+                    [matAutocomplete]="autoPatientName">
+
+                  <mat-autocomplete autoActiveFirstOption #autoPatientName="matAutocomplete">
+
+                    <mat-option *ngFor="let patient of
+                     filteredPatientsByName |
+                      async" [value]="patient">
+                      {{patient.name}}
+                    </mat-option>
+
+                  </mat-autocomplete>
+                </mat-form-field>
+              </div>
+              <div class="col col-lg-3 add-button">
+                <button type="button" class="custom-btn" mat-raised-button color="primary"
+                  (click)="openPatientAddDialog()">Add New</button>
+              </div>
+
+            </div>
+
+
+
+
+          </div>
+
+        </div>
+        <div class="col-12 col-lg-6">
+          <div class="card-layout mat-elevation-z1">
+
+            <div class="row">
+              <div class="col col-lg-4">
+                <mat-form-field class="full-width">
+                  <input type="tel" placeholder="Doctor Mobile" matInput [matAutocomplete]="autoDoctor"
+                    formControlName="docMobile" appMobileNumber>
+                  <mat-autocomplete autoActiveFirstOption #autoDoctor="matAutocomplete">
+
+                    <mat-option *ngFor="let doctor of
+                    filteredDoctors | async " [value]="doctor">
+                      {{doctor.mobileNumber}}
+                    </mat-option>
+
+                  </mat-autocomplete>
+                </mat-form-field>
+              </div>
+              <div class="col col-lg-5">
+                <mat-form-field class="full-width">
+                  <input type="text" matInput placeholder="Doctor name" formControlName="docName"
+                    [matAutocomplete]="autoDoctorName">
+
+                  <mat-autocomplete autoActiveFirstOption #autoDoctorName="matAutocomplete" appMobileNumber>
+
+                    <mat-option *ngFor="let doctor of filteredDoctorsByName | async" [value]="doctor">
+                      {{doctor.name}}
+                    </mat-option>
+
+                  </mat-autocomplete>
+                </mat-form-field>
+              </div>
+              <div class="col col-lg-3 add-button">
+                <button type="button" class="custom-btn" mat-raised-button color="primary"
+                  (click)="openDoctorAddDialog()">Add New</button>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-12 col-sm-12 col-lg-8">
+          <div class="card-layout mat-elevation-z1">
+
+            <div class="row product-input">
+              <div class="col col-lg-3">
+                <mat-form-field class="full-width">
+                  <input type="text" placeholder="Product Name" matInput [matAutocomplete]="autoProd"
+                    formControlName="prodName">
+                  <mat-autocomplete autoActiveFirstOption #autoProd="matAutocomplete">
+
+                    <mat-option *ngFor="let product of filteredProducts | async" [value]="product"
+                      matTooltip="{{product.name}}">
+                      {{product.name}}
+                    </mat-option>
+
+                  </mat-autocomplete>
+                </mat-form-field>
+              </div>
+              <div class="col col-lg-1">
+                <mat-form-field class="full-width">
+                  <input type="number" matInput placeholder="Qty" formControlName="prodQty" #prodQty appQuantity>
+                  <!-- <mat-error *ngIf="saleAddForm.get('prodQty').errors?.required">
+                    Quantity is required
+                  </mat-error> -->
+                </mat-form-field>
+              </div>
+              <!-- <div class="col col-lg-2">
+                <mat-form-field id="prod-batch-select">
+                  <mat-label>Batch No.</mat-label>
+                  <mat-select formControlName="prodBatchNo" (selectionChange)="populateBatchDetails($event.value)">
+                    <mat-option *ngFor="let option of batchOptions" [value]="option">{{ option.batch_no }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div> -->
+              <div class="col col-lg-2">
+                <mat-form-field class="full-width">
+                  <input type="text" matInput placeholder="Batch No." formControlName="batch_no">
+                </mat-form-field>
+              </div>
+              <div class="col col-lg-2">
+                <mat-form-field class="full-width">
+                  <input type="number" matInput placeholder="Discount %" formControlName="prodDisc" appDiscount>
+                </mat-form-field>
+              </div>
+              <div class="col col-lg-2">
+
+
+                <mat-form-field class="full-width">
+
+                  <input type="text" matInput placeholder="Expiry" formControlName="prodExpiry">
+
+                </mat-form-field>
+
+
+
+
+
+
+              </div>
+              <div class="col col-lg-1">
+                <mat-form-field class="full-width">
+                  <input type="number" disabled matInput placeholder="GST %" formControlName="prodGST">
+                </mat-form-field>
+              </div>
+              <div class="col col-lg-1">
+                <mat-form-field class="full-width">
+                  <input type="number" disabled matInput placeholder="Price" formControlName="prodSellingPrice">
+                </mat-form-field>
+              </div>
+            </div>
+
+
+
+            <div class="row">
+              <div class="col col-lg-2">
+                <button type="button" class="custom-btn" mat-raised-button color="primary"
+                  (click)="addInvoiceItems()">{{ productAddLabel }}</button>
+              </div>
+            </div>
+
+
+            <div class="medicine-container">
+              <div class="medicine-wrapper">
+                <div class="row" *ngFor="let row of invoiceProducts">
+                  <div class="col-4 content">
+                    <span class="mat-h4">{{row.product_name}}</span> <br>
+                    <span class="lower-content">Qty:{{row.qty}}</span>
+                  </div>
+                  <div class="col-3 content">
+                    <span class="mat-h4">Batch: {{row.batch_no}}</span> <br>
+                    <span class="lower-content">Exp: {{ row.expiryDate}}</span>
+                  </div>
+                  <div class="col-3 content">
+                    <span class="mat-h4">{{ row.selling_rate | currency: 'INR'}}
+                      ({{(row.selling_discount)? row.selling_discount : 0}}%)</span> <br>
+                    <span class="lower-content">GST: {{ row.gst }}%</span>
+                  </div>
+                  <div class="col-2 content">
+                    <button mat-icon-button matTooltip="Edit Row">
+                      <mat-icon (click)="editProduct(row)">edit</mat-icon>
+                    </button>
+                    <button mat-icon-button matTooltip="Delete Row">
+                      <mat-icon (click)="deleteProduct(row)">delete</mat-icon>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+        </div>
+        <div class="col-12 col-sm-12 col-lg-4">
+          <div class="card-layout mat-elevation-z1 amount-details">
+            <div class="row">
+              <div class="col">
+                <mat-form-field class="full-width">
+                  <input matInput [matDatepicker]="picker" placeholder="Choose a date" formControlName="saleDate">
+                  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                  <mat-datepicker #picker startView="year"></mat-datepicker>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col col-lg-12">
+                <div class="row">
+                  <div class="col col-lg-6 table-label">
+                    <span>Total</span>
+                  </div>
+                  <div class="col col-lg-6 table-data">
+                    <span>{{totalAmount | currency:'INR'}}</span>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col col-lg-6 table-label">
+                    <span>GST Total</span>
+                  </div>
+                  <div class="col col-lg-6 table-data">
+                    <span>{{taxAmount | currency:'INR'}}</span>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col col-lg-3">
+                    <label>Discount</label>
+                  </div>
+                  <div class="col col-lg-3">
+                    <mat-form-field id="discount-type-select">
+                      <mat-select formControlName="discType" (selectionChange)="calculateTotalAmount()">
+                        <mat-option *ngFor="let discountOption of discountOptions" [value]="discountOption.value">
+                          {{discountOption.label}}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+                  <div class="col col-lg-6 table-data">
+                    <!--<span>{{totalDiscount | currency:'INR'}}</span>-->
+                    <mat-form-field id="discount-select">
+                      <input type="number" matInput formControlName="totalDisc" (change)="calculateTotalAmount()"
+                        placeholder="Discount" appDiscount>
+                    </mat-form-field>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col col-lg-6 table-label">
+                    <span>Discounted Value</span>
+                  </div>
+                  <div class="col col-lg-6 table-data">
+                    <span>{{totalDiscount | currency:'INR'}}</span>
+                  </div>
+                </div>
+                <div class="divider"></div>
+                <div class="row">
+                  <div class="col col-lg-6 table-label">
+                    <span class="bold-text">NET VALUE</span>
+                  </div>
+                  <div class="col col-lg-6 table-data">
+                    <span id="totalAmount">{{netAmount | currency:'INR'}}</span>
+                  </div>
+                </div>
+
+              </div>
+
+            </div>
+          </div>
+
+
+          <div class="row">
+            <div class="col">
+              <div class="card-layout mat-elevation-z1">
+
+                <div class="row">
+                  <div class="col col-lg-6">
+                    <mat-form-field class="full-width">
+                      <input type="number" matInput placeholder="Amount Received" formControlName="amoutReceived"
+                        (input)="getAmountReceived($event.target.value)">
+                    </mat-form-field>
+                  </div>
+                  <div class="col col-lg-6">
+                    <mat-form-field class="full-width">
+                      <input disabled matInput placeholder="Return Amount" value="" formControlName="amoutReturn">
+                    </mat-form-field>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col  col-lg-5">
+                    <span>Payment Mode</span>
+                  </div>
+                  <div class="col col-lg-7 full-width">
+                    <mat-radio-group class="d-flex" aria-label="Select an option" formControlName="paymentMode">
+                      <mat-radio-button value="CASH">Cash</mat-radio-button>
+                      <mat-radio-button value="CARD">Card</mat-radio-button>
+                    </mat-radio-group>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col col-lg-5">
+                    <span>Receipt Mode:</span>
+                  </div>
+                  <div class="col col-lg-7 d-flex">
+                    <mat-checkbox formControlName="printCheck">Print</mat-checkbox>
+                    <mat-checkbox formControlName="mailCheck">Email</mat-checkbox>
+                  </div>
+                </div>
+
+                <div class="row comp-purchase">
+                  <div class="col">
+                    <button (click)="saveInvoice()" id="sale-add-btn" class="custom-btn full-width" mat-raised-button
+                      color="primary">
+                      <span *ngIf="!isSaving && billingId">Update Purchase</span>
+                      <span *ngIf="!isSaving && !billingId">Complete Purchase</span>
+                      <!-- <span *ngIf="!isSaving">Complete Purchase</span> -->
+                      <mat-spinner *ngIf="isSaving" [diameter]="30"></mat-spinner>
+                    </button>
+                  </div>
+                </div>
+
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

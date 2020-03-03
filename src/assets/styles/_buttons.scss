@@ -1,0 +1,42 @@
+@import "../../assets/styles/_colors.scss";
+@import "../../assets/styles/_fonts.scss";
+
+.button-cancel:focus {
+  border-color: blue;
+}
+
+.button-primary {
+  background-color: $primary-color;
+  color: $text-color-light;
+}
+.button-primary:hover {
+  background-color: $primary-color-dark;
+}
+.button-save:hover {
+  background-color: $positive-color-dark;
+}
+
+.button-save {
+  background-color: $positive-color;
+  color: $text-color-light;
+}
+.button-save:hover {
+  background-color: $positive-color-dark;
+}
+
+.button-cancel {
+  background-color: $negative-color;
+  color: $text-color-light;
+}
+
+.button-cancel:hover {
+  background-color: $negative-color-dark;
+}
+
+.button-disable {
+  background-color: $standby-color;
+  color: $text-color-light;
+}
+.button-disable:hover {
+  background-color: $standby-color-dark;
+}

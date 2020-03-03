@@ -1,0 +1,76 @@
+<div class="item-container">
+  <div class="page-heading">
+    <span class="header-text">Create New Subscription</span><br>
+    <span class="header-text">Edit Subscription</span><br>
+
+  </div>
+
+  <div class="content-wrapper">
+    <div class="input-form">
+      <form [formGroup]="subscriptionInputForm">
+        <div class="row">
+          <div class="col">
+
+            <div class="row">
+              <div class="col-sm-2"></div>
+              <div class="col-sm-8">
+                <mat-form-field class="full-width">
+                  <input type="text" matInput placeholder="Hospital Name Name" id="hospitalName"
+                    formControlName="hospitalName">
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-2"></div>
+              <div class="col-sm-8">
+                <mat-form-field class="full-width">
+                  <input type="text" matInput placeholder="address" id="address" formControlName="address">
+                </mat-form-field>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-sm-2"></div>
+              <div class="col-sm-8">
+                <mat-form-field class="full-width">
+                  <input type="number" matInput placeholder="Phone Number" id="phoneNumber"
+                    formControlName="phoneNumber">
+                </mat-form-field>
+              </div>
+
+            </div>
+            <div class="row">
+              <div class="col-sm-2"></div>
+              <div class="col-sm-8">
+                <mat-form-field class="full-width">
+                  <input type="text" matInput placeholder="City " id="city" formControlName="city">
+                </mat-form-field>
+              </div>
+
+            </div>
+
+
+          </div>
+
+        </div>
+
+
+        <div class="action-buttons">
+          <button mat-raised-button type="button" (click)="closeClicked()" class="btn button button-cancel">
+            Cancel
+          </button>
+          <button mat-raised-button type="button" (click)="saveSettings()" class="btn button button-save">
+            Save
+          </button>
+          <!-- <button mat-raised-button type="button" *ngIf="itemId!='new'" [disabled]="!itemInputForm.valid"
+              (click)="updateItem()" class="btn button button-save">
+              Update
+            </button> -->
+
+        </div>
+
+
+      </form>
+    </div>
+  </div>
+</div>

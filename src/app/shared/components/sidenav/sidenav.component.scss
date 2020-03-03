@@ -1,0 +1,44 @@
+@import "../../../../assets/styles/_common.scss";
+
+.sidebar {
+  font-family: $font-normal;
+  margin-top: 15vh;
+
+  .mat-nav-list {
+    display: flex;
+    flex-direction: column;
+
+    .mat-list-item {
+      color: $text-color-light;
+    }
+
+    .mat-list-item:hover {
+      background-color: $primary-color;
+      color: $text-color-dark;
+    }
+
+    a {
+      display: block;
+      text-decoration: none;
+      font-weight: $weight-bold;
+      font-size: 1.1em;
+      padding: 10px 10px 10px 25px; //top right bottom left
+      width: 100%;
+    }
+
+
+  }
+
+  .router-link-active {
+    color: $primary-color;
+  }
+
+  .router-link-active:hover {
+    color: $text-color-light;
+  }
+
+  #logout-btn {
+    margin-top: 40px;
+    color: $negative-color;
+  }
+}

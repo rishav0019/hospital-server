@@ -1,0 +1,408 @@
+<div class="doctor-add-container">
+  <h2 mat-dialog-title>Add/Edit Doctor</h2>
+
+  <div mat-dialog-content>
+    <form [formGroup]="doctorAddForm">
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="row">
+            <div class="col">
+              <mat-form-field class="full-width">
+                <input type="text" matInput placeholder="Doctor Name" id="name" formControlName="name" />
+                <!-- <mat-error *ngIf="doctorAddForm.get('name').errors?.required">
+                Name is <strong>required</strong>
+              </mat-error> -->
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <mat-form-field class="full-width">
+                <input type="text" matInput placeholder="Mobile No." formControlName="mobileNumber" appMobileNumber />
+                <!-- <mat-error *ngIf="doctorAddForm.get('mobileNumber').errors?.required">
+                    Mobile is <strong>required</strong>
+                  </mat-error> -->
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <mat-form-field class="full-width">
+                <mat-label>Practice Area</mat-label>
+                <mat-select formControlName="speciality">
+                  <mat-option *ngFor="let speciality of specialities" [value]="speciality.name">
+                    {{ speciality.name }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <mat-form-field class="full-width">
+                <input type="text" matInput placeholder="Email" formControlName="email" />
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="col">
+            <div class="form-group row">
+              <img *ngIf="subsImage" width="200px" height="200px" src="{{ subsImage.url }}" alt="None"
+                class="rounded img-thumbnail" />
+            </div>
+            <div class="form-group row">
+              <app-image-upload (imageEmitter)="getImageURL($event)"></app-image-upload>
+              <!-- <app-image-upload></app-image-upload> -->
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-3 radio-group">
+          <mat-radio-group aria-label="Select an option" formControlName="gender">
+            <mat-radio-button value="MALE">Male</mat-radio-button>
+            <mat-radio-button value="FEMALE">Female</mat-radio-button>
+          </mat-radio-group>
+        </div>
+        <div class="col-sm-3">
+          <mat-form-field class="full-width">
+            <input type="number" matInput placeholder="Consultation Fee" formControlName="consultationFee" />
+          </mat-form-field>
+        </div>
+        <div class="col-sm-6">
+          <mat-form-field class="full-width">
+            <input type="text" matInput placeholder="Registration no." formControlName="regno" />
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <!--
+        <mat-form-field class="full-width">
+          <input type="text" matInput placeholder="State" formControlName="state">
+        </mat-form-field> -->
+
+          <mat-form-field class="full-width">
+            <input type="text" placeholder="State" matInput formControlName="state" />
+
+            <mat-autocomplete autoActiveFirstOption #autoState="matAutocomplete">
+              <!-- <mat-option *ngFor="let state of filteredStates | async" [value]="state">
+              {{state.v}}
+            </mat-option> -->
+            </mat-autocomplete>
+          </mat-form-field>
+        </div>
+
+        <div class="col">
+          <!-- <mat-form-field class="full-width">
+          <input type="text" matInput placeholder="City" formControlName="city">
+        </mat-form-field> -->
+
+          <mat-form-field class="full-width">
+            <input type="text" placeholder="City" matInput [matAutocomplete]="autoCity" formControlName="city" />
+
+            <mat-autocomplete autoActiveFirstOption #autoCity="matAutocomplete">
+              <!-- <mat-option *ngFor="let city of filteredCities | async" [value]="city">
+              {{city.v}}
+            </mat-option> -->
+            </mat-autocomplete>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="row">
+            <div class="col-sm-3">
+              <span class="time-slot">
+                Morning
+              </span>
+              <br>
+              <span>
+                Start Time
+              </span>
+              <span>
+                <mat-form-field class="full-width">
+                  <input type="time" class="form-control" formControlName="morningStartTime" matInput />
+                </mat-form-field>
+              </span>
+              <span>
+                End Time
+              </span>
+              <span>
+                <mat-form-field class="full-width">
+                  <input type="time" class="form-control" formControlName="morningEndTime" matInput />
+                </mat-form-field>
+              </span>
+            </div>
+            <div class="col-sm-3">
+              <span class="time-slot">
+                Afternoon
+              </span>
+              <br>
+              <span>
+                Start Time
+              </span>
+              <span>
+                <mat-form-field class="full-width">
+                  <input type="time" class="form-control" formControlName="afternoonStartTime" matInput />
+                </mat-form-field>
+              </span>
+              <span>
+                End Time
+              </span>
+              <span>
+                <mat-form-field class="full-width">
+                  <input type="time" class="form-control" formControlName="afternoonEndTime" matInput />
+                </mat-form-field>
+              </span>
+            </div>
+            <div class="col-sm-3">
+              <span class="time-slot">
+                Evening
+              </span>
+              <br>
+              <span>
+                Start Time
+              </span>
+              <span>
+                <mat-form-field class="full-width">
+                  <input type="time" id="input" class="form-control" formControlName="eveningStartTime" matInput />
+                </mat-form-field>
+              </span>
+              <span>
+                End Time
+              </span>
+              <span>
+                <mat-form-field class="full-width">
+                  <input type="time" id="input" class="form-control" formControlName="eveningEndTime" matInput />
+                </mat-form-field>
+              </span>
+            </div>
+            <div class="col-sm-3">
+              <span class="time-slot">
+                Night
+              </span>
+              <br>
+              <span>
+                Start Time
+              </span>
+              <span>
+                <mat-form-field class="full-width">
+                  <input type="time" id="input" class="form-control" formControlName="nightStartTime" matInput />
+                </mat-form-field>
+              </span>
+              <span>
+                End Time
+              </span>
+              <span>
+                <mat-form-field class="full-width">
+                  <input type="time" id="input" class="form-control" formControlName="nightEndTime" matInput />
+                </mat-form-field>
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="row">
+            <div class="col-sm-12">
+              <!-- <ng-multiselect-dropdown [placeholder]="'Available on'" [data]="dropdownList"
+                formControlName="availableOn" [settings]="dropdownSettings" (onSelect)="onItemSelect($event)"
+                (onSelectAll)="onSelectAll($event)">
+              </ng-multiselect-dropdown> -->
+              <ng-multiselect-dropdown [placeholder]="'Available on'" [data]="dropdownList"
+                formControlName="availableOn" [settings]="dropdownSettings">
+              </ng-multiselect-dropdown>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input type="text" matInput [maxlength]="16" placeholder="Doctor Degree " formControlName="degree" />
+          </mat-form-field>
+        </div>
+
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input type="number" matInput placeholder="Year of Experience" formControlName="yearOfExperience" />
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input type="text" matInput placeholder="About Doctor" formControlName="about" />
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-6">
+          <mat-form-field class="full-width">
+            <input type="text" #spec matInput placeholder="Doctor Specializations Details"
+              formControlName="specializations" />
+          </mat-form-field>
+        </div>
+        <div class="col-sm-2">
+          <button class="custom-btn" (click)="addSpecialization(spec.value)" mat-button color="primary">
+            Add
+          </button>
+        </div>
+        <div class="col-sm-4">
+          <span *ngFor="let specialization of specializations">
+            <span (click)="deleteSpecialization(specialization)">
+              {{ specialization }}
+              <mat-icon>highlight_off</mat-icon>
+            </span>
+          </span>
+          <hr />
+        </div>
+      </div>
+      <!-- <hr /> -->
+      <div class="row">
+        <div class="col-sm-6">
+          <mat-form-field class="full-width">
+            <input type="text" #degree matInput placeholder="Education Details" formControlName="educationDetails" />
+          </mat-form-field>
+        </div>
+        <div class="col-sm-2">
+          <button class="custom-btn" (click)="addEducation(degree.value)" mat-button color="primary">
+            Add
+          </button>
+        </div>
+        <div class="col-sm-4">
+          <span *ngFor="let edu of educationDetails">
+            <span (click)="deleteEducation(edu)">
+              {{ edu }}
+              <mat-icon>highlight_off</mat-icon>
+            </span>
+          </span>
+          <hr />
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-6">
+          <mat-form-field class="full-width">
+            <input type="text" #service matInput placeholder="services Details" formControlName="services" />
+          </mat-form-field>
+        </div>
+        <div class="col-sm-2">
+          <button class="custom-btn" (click)="addServices(service.value)" mat-button color="primary">
+            Add
+          </button>
+        </div>
+        <div class="col-sm-4">
+          <span *ngFor="let service of services">
+            <span (click)="deleteServices(service)">
+              {{ service }}
+              <mat-icon>highlight_off</mat-icon>
+            </span>
+          </span>
+          <hr />
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-6">
+          <mat-form-field class="full-width">
+            <input type="text" #experience matInput placeholder="Experience Details" formControlName="experience" />
+          </mat-form-field>
+        </div>
+        <div class="col-sm-2">
+          <button class="custom-btn" (click)="addExperience(experience.value)" mat-button color="primary">
+            Add
+          </button>
+        </div>
+        <div class="col-sm-4">
+          <span *ngFor="let experience of experiences">
+            <span (click)="deleteExperience(service)">
+              {{ experience }}
+              <mat-icon>highlight_off</mat-icon>
+            </span>
+          </span>
+          <hr />
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-6">
+          <mat-form-field class="full-width">
+            <input type="text" #member matInput placeholder="Memberships Details" formControlName="memberships" />
+          </mat-form-field>
+        </div>
+        <div class="col-sm-2">
+          <button class="custom-btn" (click)="addMembership(member.value)" mat-button color="primary">
+            Add
+          </button>
+        </div>
+        <div class="col-sm-4">
+          <span *ngFor="let experience of memberships">
+            <span (click)="deleteMembership(service)">
+              {{ experience }}
+              <mat-icon>highlight_off</mat-icon>
+            </span>
+          </span>
+          <hr />
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-6">
+          <mat-form-field class="full-width">
+            <input type="text" #awa matInput placeholder="Awards and Recognitions" formControlName="awards" />
+          </mat-form-field>
+        </div>
+        <div class="col-sm-2">
+          <button class="custom-btn" (click)="addAwards(awa.value)" mat-button color="primary">
+            Add
+          </button>
+        </div>
+        <div class="col-sm-4">
+          <span *ngFor="let award of awards">
+            <span (click)="deleteAwards(award)">
+              {{ award }}
+              <mat-icon>highlight_off</mat-icon>
+            </span>
+          </span>
+          <hr />
+        </div>
+      </div>
+      <!-- <div class="row">
+        <div class="col-sm-6">
+          <ng-multiselect-dropdown
+            [placeholder]="'Available on'"
+            [data]="dropdownList"
+            formControlName="availableOn"
+            [settings]="dropdownSettings"
+            (onSelect)="onItemSelect($event)"
+            (onSelectAll)="onSelectAll($event)"
+          >
+          </ng-multiselect-dropdown>
+        </div>
+      </div> -->
+
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input type="text" matInput placeholder="Doctor Address" formControlName="address" appMobileNumber />
+            <!-- <mat-error *ngIf="doctorAddForm.get('mobileNumber').errors?.required">
+                Mobile is <strong>required</strong>
+              </mat-error> -->
+          </mat-form-field>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div mat-dialog-actions>
+    <button class="custom-btn" (click)="onNoClick()" mat-button color="primary">
+      Back
+    </button>
+    <button class="custom-btn" id="cust-add-btn" (click)="saveDoctor()" mat-button color="primary">
+      <span *ngIf="!isSaving && doctorId == 'new'">Save</span>
+      <span *ngIf="!isSaving && doctorId != 'new'">Update</span>
+      <mat-spinner *ngIf="isSaving" [diameter]="30"></mat-spinner>
+    </button>
+  </div>
+</div>

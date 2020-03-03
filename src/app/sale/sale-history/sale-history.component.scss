@@ -1,0 +1,181 @@
+@import "../../../assets/styles/common";
+
+.sale-history-container {
+  padding-top: 30px;
+  padding-left: 1vw;
+  padding-right: 1vw;
+  margin-top: 4px;
+  height: calc(100vh - 4px);
+  overflow-y: scroll;
+
+
+
+  table {
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  tr.detail-row {
+    height: 0;
+  }
+
+
+
+  tr.element-row:active {
+    background: #efefef;
+  }
+
+  td.mat-cell {
+    border-bottom-style: none;
+  }
+
+  th.mat-header-cell {
+    border-bottom-style: none;
+  }
+
+
+  .element-row td {
+    border-bottom-width: 0;
+
+  }
+
+  th {
+    font-weight: bold;
+    font-size: 1.1em
+  }
+
+  .expand-element-detail {
+    overflow: hidden;
+    display: flex;
+  }
+
+
+
+
+  .element-description {
+    padding: 16px;
+    margin: 10px;
+  }
+
+  .element-description-attribution {
+    font-weight: bold;
+    font-size: 15px;
+    padding: 10px;
+  }
+
+  .delivery {
+    padding: 10px;
+  }
+
+  .delivery-list {
+    list-style: none;
+  }
+
+  .status-select {
+    margin-top: -25px;
+  }
+
+  .table-wrapper {
+    margin-top: 10px;
+  }
+
+  .make-red {
+    background-color: #ef9a9a;
+  }
+
+  .make-green {
+    background-color: #c8e6c9;
+  }
+
+  .make-yellow {
+    background-color: #ffffa1;
+  }
+
+  .expand-element-detail {
+    overflow: hidden;
+    display: flex;
+  }
+
+  .table-container {
+    height: 50vh;
+    overflow: auto;
+
+    .custom-btn {
+      color: $base-color;
+    }
+  }
+
+  .sale-overview {
+    //display: flex;
+    justify-content: center;
+
+    .search {
+      margin-top: 4vw;
+    }
+
+    .card-layout {
+      background-color: inherit;
+      padding: 1.2vw;
+      font-size: 1.2em;
+      line-height: 2em;
+      border-radius: 10px;
+
+      .amount {
+        font-weight: 700;
+        color: $base-color;
+      }
+    }
+  }
+}
+
+.sales-details {
+  padding-top: 45px;
+
+  .sales-data {
+    margin: 15px 100px;
+
+    .amount {
+      font-weight: 700;
+      color: $base-color;
+      font-size: larger;
+    }
+  }
+
+}
+
+@media only screen and (max-width: 992px) {
+  .sales-details {
+    display: none;
+  }
+
+  .sale-overview {
+    display: block;
+  }
+}
+
+@media only screen and (min-width: 992px) {
+  .sales-details {
+    display: block;
+  }
+
+  .sale-overview {
+    display: none;
+  }
+}
+
+.load-wrapper {
+  margin-top: 60px;
+}
+
+.loading-item {
+  width: 100%;
+  height: 75px;
+  background-color: #ffffff;
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-bottom: 10px;
+}
+
+.w50 {
+  width: 50%;
+}
